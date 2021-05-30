@@ -23,4 +23,4 @@ def search_vietnamwork():
 if __name__ == '__main__':
     app.config['JSON_AS_ASCII'] = False
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-    app.run(port=8080, host='localhost', debug=True)
+    app.run(port=8081, host='localhost', debug=True)
