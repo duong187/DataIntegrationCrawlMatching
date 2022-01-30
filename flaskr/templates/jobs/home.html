@@ -1,26 +1,28 @@
 {% extends 'base.html' %} {% block panel %}
 <!-- <img  src="{{ url_for('static', filename='/assets/home.jpg') }}" /> -->
-<div class="panel-home">
-  {% block title %}
-  <h1>Hiện đang có {{jobs_count}} bản tin dữ liệu việc làm thô</h1>
-  <h1>Lần cập nhật cuối:</h1>
-  <h2>itviec: {{last_update['itviec']}}</h2>
-  <h2>Vietnamwork: {{last_update['vietnamwork']}}</h2>
-  {% endblock %}
-  <base href="http://192.168.0.103/" />
-
-  <a href="/itviec"><button class="craw-button">Craw It việc</button></a>
-
-  <a href="vietnamwork"
-    ><button class="craw-button">Craw vietnamwork</button></a
+<div class="panel-home-container">
+  <div
+    class="panel-home"
+    style="background-image: url({{url_for('static', filename='images/bg-01.jpg')}})"
   >
+    <h1>Hiện đang có {{jobs_count}} bản tin dữ liệu việc làm thô</h1>
+    <h1>Lần cập nhật cuối:</h1>
+    <h2>itviec: {{last_update['itviec']}}</h2>
+    <h2>Vietnamwork: {{last_update['vietnamwork']}}</h2>
 
-  <!-- <form class="searchBox" method="GET" action="/search">
-  <input class="searchInput" type='text' name = 'search_text' />
-  <button class="searchButton" type='submit'><i class="material-icons">
-    search
-</i></button>
-</form> -->
+    <a href="/itviec"><button class="craw-button">Craw It việc</button></a>
+
+    <a href="vietnamwork"
+      ><button class="craw-button">Craw vietnamwork</button></a
+    >
+
+    <!-- <form class="searchBox" method="GET" action="/search">
+    <input class="searchInput" type='text' name = 'search_text' />
+    <button class="searchButton" type='submit'><i class="material-icons">
+      search
+  </i></button>
+  </form> -->
+  </div>
 </div>
 
 {% endblock %} {% block header %}
@@ -41,7 +43,7 @@
   }
 
   th {
-    background-color: darkorange;
+    background-color: rgb(17, 193, 224);
   }
 
   td.info,
@@ -50,7 +52,10 @@
   }
 
   tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #d4fffd;
+  }
+  tr:nth-child(odd) {
+    background-color: #d3f2f0;
   }
   .demo-container {
     display: flex;

@@ -140,9 +140,12 @@ def scrap_vietnamwork() -> list[Entry]:
     # ), search_result)]
     # with io.open('VietnamWork.txt', 'w', encoding='utf-8') as f:
     #     f.write(json.dumps(res, ensure_ascii=False))
-    time.sleep(20)
+    time.sleep(6)
     today = date.today()
     with io.open('data/VietnamWork_lastUpdate.txt', 'w', encoding='utf-8') as f:
         f.write(today.strftime("%d/%m/%Y"))
 
-    return
+    return {'result': 'ok'}
+
+
+scrap_vietnamwork()

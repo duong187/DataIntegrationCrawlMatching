@@ -10,6 +10,7 @@ from flask_pymongo import PyMongo
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify, Flask
 )
+from .auth import login_required
 
 
 def create_app(test_config=None):
@@ -39,28 +40,33 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
     # a simple page that says hello
-
-    @app.route('/hello')
-    def hello():
-        db = get_db()
-        jobs_count = db.jobs_info.count()
-        return jsonify(jobs_count)
-
-    @app.route('/itviec', methods=['GET'])
-    def itviec():
-        result = jsonify(result=scrap_itviec())
-        return redirect(url_for('home'))
-
-    @ app.route('/vietnamwork')
-    def vietnamwork():
-        result = jsonify(result=scrap_vietnamwork())
-        return redirect(url_for('home'))
-
+    app.add_url_rule('/', endpoint='home')
+    app.add_url_rule('/home', endpoint='home')
+    
     @ app.route('/home')
+    @login_required
     def home():
         res = load_data()
         print(res['data_count'])
         jobs_count = res['data_count']
         text_s = 'aaa'
         return render_template("jobs/home.html", jobs_count=jobs_count, demo_itviec=res['demo_data_itviec'], demo_vietnamwork=res['demo_data_vietnamwork'], last_update=res['last_update'])
+
+    @app.route('/itviec', methods=['GET'])
+    @login_required
+    def itviec():
+        result = jsonify(result=scrap_itviec())
+        return redirect(url_for('home'))
+    @app.route('/')
+    @login_required
+    def home_page():
+        return redirect(url_for('home'))
+
+    @ app.route('/vietnamwork')
+    @login_required
+    def vietnamwork():
+        result = jsonify(result=scrap_vietnamwork())
+        return redirect(url_for('home'))
+
+    
     return app

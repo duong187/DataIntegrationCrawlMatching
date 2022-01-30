@@ -5,7 +5,7 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from pymongo import InsertOne, DeleteOne, ReplaceOne
-from flaskr.db import get_db
+from .db import get_db
 from bson.objectid import ObjectId
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -66,7 +66,7 @@ def load_logged_in_user():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('home'))
 
 def login_required(view):
     @functools.wraps(view)
